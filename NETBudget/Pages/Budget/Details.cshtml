@@ -1,0 +1,37 @@
+@page
+@model NETBudget.Pages.Budget.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Income</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Income.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Income.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Income.Rate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Income.Rate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Income.AnnualIncome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Income.AnnualIncome)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Income.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
