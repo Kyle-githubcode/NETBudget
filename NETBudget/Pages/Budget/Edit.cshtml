@@ -1,4 +1,4 @@
-@page
+@page "{id:int}"
 @model NETBudget.Pages.Budget.EditModel
 
 @{
@@ -25,9 +25,9 @@
                 <span asp-validation-for="Income.Rate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Income.AnnualIncome" class="control-label"></label>
-                <input asp-for="Income.AnnualIncome" class="form-control" />
-                <span asp-validation-for="Income.AnnualIncome" class="text-danger"></span>
+                <label asp-for="Income.Amount" class="control-label"></label>
+                <input asp-for="Income.Amount" class="form-control" />
+                <span asp-validation-for="Income.Amount" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

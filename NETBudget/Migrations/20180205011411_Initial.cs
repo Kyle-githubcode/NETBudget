@@ -15,9 +15,9 @@ namespace NETBudget.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AnnualIncome = table.Column<decimal>(nullable: false),
-                    Rate = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true)
+                    Amount = table.Column<decimal>(nullable: false),
+                    Rate = table.Column<string>(maxLength: 60, nullable: false),
+                    Title = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

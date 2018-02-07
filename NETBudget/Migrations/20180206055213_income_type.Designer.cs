@@ -11,8 +11,8 @@ using System;
 namespace NETBudget.Migrations
 {
     [DbContext(typeof(IncomeContext))]
-    [Migration("20180204062629_Initial")]
-    partial class Initial
+    [Migration("20180206055213_income_type")]
+    partial class income_type
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,11 +26,14 @@ namespace NETBudget.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<decimal>("AnnualIncome");
+                    b.Property<decimal>("Amount");
 
-                    b.Property<string>("Rate");
+                    b.Property<string>("Rate")
+                        .IsRequired()
+                        .HasMaxLength(60);
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.HasKey("ID");
 

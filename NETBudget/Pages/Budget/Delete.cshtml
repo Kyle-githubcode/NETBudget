@@ -1,4 +1,4 @@
-@page
+@page "{id:int}"
 @model NETBudget.Pages.Budget.DeleteModel
 
 @{
@@ -25,13 +25,13 @@
             @Html.DisplayFor(model => model.Income.Rate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Income.AnnualIncome)
+            @Html.DisplayNameFor(model => model.Income.Amount)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Income.AnnualIncome)
+            @Html.DisplayFor(model => model.Income.Amount)
         </dd>
     </dl>
-    
+
     <form method="post">
         <input type="hidden" asp-for="Income.ID" />
         <input type="submit" value="Delete" class="btn btn-default" /> |

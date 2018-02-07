@@ -53,7 +53,7 @@ namespace NETBudget.Pages.Budget
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IncomeExists(Income.ID))
+                if (!_context.Income.Any(e => e.ID == Income.ID))
                 {
                     return NotFound();
                 }

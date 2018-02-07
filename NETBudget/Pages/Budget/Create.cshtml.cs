@@ -26,6 +26,21 @@ namespace NETBudget.Pages.Budget
         [BindProperty]
         public Income Income { get; set; }
 
+        public SelectList RateList()
+        {
+            SelectList ratelist = new SelectList(
+                new List<SelectListItem>
+                {
+                    new SelectListItem{Text = "hourly", Value = "hourly"},
+                    new SelectListItem { Text = "daily", Value = "daily" },
+                    new SelectListItem { Text = "weekly", Value = "weekly" },
+                    new SelectListItem{Text = "monthly", Value = "monthly"},
+                    new SelectListItem{Text = "yearly", Value = "yearly"}
+                }, "Value", "Text"
+                );
+            return ratelist;
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

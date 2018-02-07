@@ -1,4 +1,4 @@
-@page
+@page "{id:int}"
 @model NETBudget.Pages.Budget.DetailsModel
 
 @{
@@ -24,10 +24,10 @@
             @Html.DisplayFor(model => model.Income.Rate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Income.AnnualIncome)
+            @Html.DisplayNameFor(model => model.Income.Amount)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Income.AnnualIncome)
+            @Html.DisplayFor(model => model.Income.Amount)
         </dd>
     </dl>
 </div>

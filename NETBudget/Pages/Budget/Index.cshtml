@@ -3,46 +3,113 @@
 
 @{
     ViewData["Title"] = "Index";
+    ViewData["Total"] = Model.Income_Total - Model.Expense_Total;
 }
 
 <h2>Index</h2>
 
+<h3>Income</h3>
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Enter Income</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Income[0].Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Income[0].Rate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Income[0].AnnualIncome)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Income[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Income[0].Rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Income[0].Amount)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Income) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AnnualIncome)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Income.Where(income => income.Type() == "Income"))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Income_Total)
+            </td>
+            <td></td>
+        </tr>
+    </tfoot>
 </table>
+
+<h3>Expenses</h3>
+<p>
+    <a asp-page="Create">Enter Expense</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Income[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Income[0].Rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Income[0].Amount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Income.Where(income => income.Type() == "Expense"))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Expense_Total)
+            </td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+<h3>Annual Budget</h3>
+<p>@ViewData["Total"]</p>
