@@ -19,23 +19,43 @@ namespace NETBudget.Models
         [DataType(DataType.Currency)]
         public decimal Income_Total()
         {
-            decimal income_total = 0;
-            foreach (var item in Income.Where(income => income.Type() == "Income"))
-            {
-                income_total += item.Amount;
-            }
+            decimal income_total = Calculate_Total(Income, "Income");
             return income_total;
         }
 
         [DataType(DataType.Currency)]
         public decimal Expense_Total()
         {
-            decimal expense_total = 0;
-            foreach (var item in Income.Where(income => income.Type() == "Expense"))
-            {
-                expense_total += item.Amount;
-            }
+            decimal expense_total = Calculate_Total(Income, "Expense");
             return -expense_total;
+        }
+
+        private decimal Calculate_Total(DbSet<Income> Income, string type)
+        {
+            decimal total = 0;
+            foreach (var item in Income.Where(income => income.Type() == type))
+            {
+                decimal modifier = RateModifer(item);
+                total += item.Amount*modifier;
+            }
+            return total;
+        }
+
+        private decimal RateModifer(Income Income)
+        {
+            switch(Income.Rate)
+            {
+                case "hourly":
+                    return 24*365;
+                case "daily":
+                    return 365;
+                case "weekly":
+                    return 52;
+                case "monthly":
+                    return 12;
+                default:
+                    return 1;
+            }
         }
     }
 }

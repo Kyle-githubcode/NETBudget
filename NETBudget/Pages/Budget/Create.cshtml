@@ -22,7 +22,6 @@
                 <label asp-for="Income.Rate" class="control-label"></label>
                 <select asp-for="Income.Rate" class="form-control" 
                         asp-items="@(Model.RateList())">
-                    <option>Select pay rate</option>
                 </select>
                 <span asp-validation-for="Income.Rate" class="text-danger"></span>
             </div>
