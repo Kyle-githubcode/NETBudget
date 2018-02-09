@@ -19,6 +19,7 @@ namespace NETBudget.Pages.Budget
             _context = context;
             Income_Total = context.Income_Total();
             Expense_Total = context.Expense_Total();
+            Total = context.Total();
         }
 
         public IList<Income> Income { get;set; }
@@ -28,6 +29,9 @@ namespace NETBudget.Pages.Budget
 
         [DataType(DataType.Currency)]
         public decimal Expense_Total { get; set; }
+
+        [DataType(DataType.Currency)]
+        public decimal Total { get; set; }
 
         public async Task OnGetAsync()
         {

@@ -5,19 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using NETBudget.Models;
 
 namespace NETBudget.Pages.Budget
 {
-    public class EditModel : PageModel
+    public class CreateExpenseModel : PageModel
     {
         private readonly NETBudget.Models.IncomeContext _context;
 
-        public EditModel(NETBudget.Models.IncomeContext context)
+        public CreateExpenseModel(NETBudget.Models.IncomeContext context)
         {
             _context = context;
         }
+
+        public IActionResult OnGet()
+        {
+            return Page();
+        }
+
 
         [BindProperty]
         public Income Income { get; set; }
@@ -38,22 +43,6 @@ namespace NETBudget.Pages.Budget
             return ratelist;
         }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Income = await _context.Income.SingleOrDefaultAsync(m => m.ID == id);
-
-            if (Income == null)
-            {
-                return NotFound();
-            }
-            return Page();
-        }
-
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -61,30 +50,11 @@ namespace NETBudget.Pages.Budget
                 return Page();
             }
 
-            _context.Attach(Income).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Income.Any(e => e.ID == Income.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            Income.Amount *= -1;
+            _context.Income.Add(Income);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
-        }
-
-        private bool IncomeExists(int id)
-        {
-            return _context.Income.Any(e => e.ID == id);
         }
     }
 }

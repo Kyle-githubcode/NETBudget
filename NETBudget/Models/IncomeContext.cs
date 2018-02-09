@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
+//The object used for the Budget page. Uses a database of Income objects.
+
 namespace NETBudget.Models
 {
     public class IncomeContext : DbContext
@@ -23,6 +25,8 @@ namespace NETBudget.Models
             return income_total;
         }
 
+        //The Calculate_Total for expenses will return a negative decimal, but Expense_Total needs to return a positive value for the page view.
+
         [DataType(DataType.Currency)]
         public decimal Expense_Total()
         {
@@ -30,6 +34,13 @@ namespace NETBudget.Models
             return -expense_total;
         }
 
+        [DataType(DataType.Currency)]
+        public decimal Total()
+        {
+            return Income_Total() - Expense_Total();
+        }
+
+        //uses the Type variable to filter the database. Also uses the Rate and Amount variables to find an object's annual income 
         private decimal Calculate_Total(DbSet<Income> Income, string type)
         {
             decimal total = 0;
@@ -51,6 +62,8 @@ namespace NETBudget.Models
                     return 365;
                 case "weekly":
                     return 52;
+                case "fortnightly":
+                    return 26;
                 case "monthly":
                     return 12;
                 default:

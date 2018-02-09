@@ -15,6 +15,7 @@ namespace NETBudget.Models
         [DataType(DataType.Currency)]
         public decimal Amount { get; set; }
 
+        //The Type variable determines which table the Income object will appear in
         public string Type()
         {
             if(Amount < 0)

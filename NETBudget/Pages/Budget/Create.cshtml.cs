@@ -33,6 +33,7 @@ namespace NETBudget.Pages.Budget
                 {
                     new SelectListItem{Text = "yearly", Value = "yearly"},
                     new SelectListItem{Text = "monthly", Value = "monthly"},
+                    new SelectListItem { Text = "fortnightly", Value = "fortnightly" },
                     new SelectListItem { Text = "weekly", Value = "weekly" },
                     new SelectListItem { Text = "daily", Value = "daily" },
                     new SelectListItem{Text = "hourly", Value = "hourly"}

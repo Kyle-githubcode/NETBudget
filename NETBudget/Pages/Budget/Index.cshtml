@@ -1,17 +1,18 @@
 @page
 @model NETBudget.Pages.Budget.IndexModel
 
+    @*Total budget is set as a variable upon page load*@
 @{
     ViewData["Title"] = "Index";
     ViewData["Total"] = Model.Income_Total - Model.Expense_Total;
 }
 
-<h2>Index</h2>
-
 <h3>Income</h3>
 <p>
     <a asp-page="Create">Enter Income</a>
 </p>
+
+@*Income Table*@
 <table class="table">
     <thead>
         <tr>
@@ -62,8 +63,10 @@
 
 <h3>Expenses</h3>
 <p>
-    <a asp-page="Create">Enter Expense</a>
+    <a asp-page="CreateExpense">Enter Expense</a>
 </p>
+
+@*Expenses Table*@
 <table class="table">
     <thead>
         <tr>
@@ -112,4 +115,4 @@
     </tfoot>
 </table>
 <h3>Annual Budget</h3>
-<p>@ViewData["Total"]</p>
+<p>@Html.DisplayFor(modelItem => Model.Total)</p>
